@@ -32,10 +32,10 @@ func main() {
 
 ## RoadMap
 
--Método DeleteRange
--Outros tipos de list(string, int...)
--Gerar benchs
--Verificar outros métodos do .Net(List)
+*Método DeleteRange
+*Outros tipos de list(string, int...)
+*Gerar benchs
+*Verificar outros métodos do .Net(List)
 
 ## License
 
