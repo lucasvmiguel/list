@@ -420,3 +420,27 @@ func TestFindTrueForAll(t *testing.T) {
 		t.Errorf("expect %s to be true", b2)
 	}
 }
+
+func BenchmarkAddAndGetPure(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		var list []int
+
+		for i := 0; i < 1000000; i++ {
+			list = append(list, i)
+		}
+
+		// list[0] + list[500000]
+	}
+}
+
+func BenchmarkAddAndGet(b *testing.B) {
+
+	for n := 0; n < b.N; n++ {
+		list := Generic{}
+		for i := 0; i < 1000000; i++ {
+			list.Add(1)
+		}
+
+		// list.GetAt(500000)
+	}
+}
