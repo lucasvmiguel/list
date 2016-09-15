@@ -13,11 +13,13 @@ func (l *Generic) Add(val interface{}) {
 }
 
 func (l *Generic) InsertAt(i int32, val interface{}) {
-	//a = append(l.list[]
+	l.list = append(l.list, 0)
+	copy(l.list[i+1:], l.list[i:])
+	l.list[i] = val
 }
 
-func (l *Generic) InsertRangeAt(i int32, val []interface{}) {
-	//a = append(l.list[]
+func (l *Generic) InsertRangeAt(i int32, vals []interface{}) {
+	l.list = append(l.list[:i], append(vals, l.list[i:]...)...)
 }
 
 func (l *Generic) InsertLast(val interface{}) {
@@ -28,8 +30,8 @@ func (l *Generic) GetAt(i int32) interface{} {
 	return l.list[i]
 }
 
-func (l *Generic) GetRange(ib int32, il int32) interface{} {
-	return l.list[ib:il]
+func (l *Generic) GetRange(begin int32, end int32) []interface{} {
+	return l.list[begin : end+1]
 }
 
 func (l *Generic) GetFirst() interface{} {
@@ -51,6 +53,10 @@ func (l *Generic) RemoveFirst() {
 func (l *Generic) RemoveLast() {
 	l.list = l.list[:len(l.list)-1]
 }
+
+// func (l *Generic) RemoveRange(begin int32, end int32) {
+// 	//TODO
+// }
 
 func (l *Generic) Count() int {
 	return len(l.list)
@@ -90,6 +96,10 @@ func (l *Generic) Find(cond func(interface{}) bool) interface{} {
 		}
 	}
 	return nil
+}
+
+func (l *Generic) FindAll(cond func(interface{}) bool) []interface{} {
+	return l.Filter(cond)
 }
 
 func (l *Generic) FindLast(cond func(interface{}) bool) interface{} {
@@ -167,13 +177,13 @@ func (l *Generic) ToSliceInt() []int {
 	return intList
 }
 
-func (l *Generic) ToSliceFloat32() []float32 {
-	float32List := make([]float32, len(l.list))
+func (l *Generic) ToSliceFloat64() []float64 {
+	float64List := make([]float64, len(l.list))
 	for k := range l.list {
-		val, ok := l.list[k].(float32)
+		val, ok := l.list[k].(float64)
 		if ok {
-			float32List[k] = val
+			float64List[k] = val
 		}
 	}
-	return float32List
+	return float64List
 }
