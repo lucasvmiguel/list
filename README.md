@@ -20,7 +20,7 @@ go get github.com/lucasvmiguel/list
 import "github.com/lucasvmiguel/list"
 
 func main() {
-  l := Generic{}
+  l := list.Generic{}
   l.Add("1")
   l.Add("2")
   l.Add("3")
