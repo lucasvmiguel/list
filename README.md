@@ -14,6 +14,22 @@ https://msdn.microsoft.com/pt-br/library/6sh2ey19(v=vs.110).aspx
 go get github.com/lucasvmiguel/list
 ```
 
+## How to use
+
+``` go
+import "github.com/lucasvmiguel/list"
+
+func main() {
+  l := Generic{}
+  l.Add("1")
+  l.Add("2")
+  l.Add("3")
+
+  l.Me() //[]interface{"1", "2", "3"}
+  l.ToSliceString() //[]string{"1", "2", "3"}
+}
+```
+
 ## RoadMap
 
 -Método DeleteRange
