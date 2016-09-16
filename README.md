@@ -26,7 +26,7 @@ func main() {
   l.Add("2")
   l.Add("3")
 
-  l.Me() //[]interface{"1", "2", "3"}
+  l.Values() //[]interface{"1", "2", "3"}
   l.ToSliceString() //[]string{"1", "2", "3"}
 }
 ```
