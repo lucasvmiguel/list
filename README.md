@@ -46,11 +46,66 @@ BenchmarkGetPure-4   	2000000000	      0.77 ns/op
 BenchmarkGet-4       	  30000000	      34.0 ns/op
 ```
 
+## Methods
+
+AddRange(vals []interface{})
+
+Add(val interface{})
+
+InsertAt(i int32, val interface{})
+
+InsertRangeAt(i int32, vals []interface{})
+
+InsertLast(val interface{})
+
+GetAt(i int32) interface{}
+
+GetRange(begin int32, end int32) []interface{}
+
+GetFirst() interface{}
+
+GetLast() interface{}
+
+RemoveAt(i int32)
+
+RemoveFirst()
+
+RemoveLast()
+
+Count() int
+
+Clear()
+
+Values() []interface{}
+
+Filter(cond func(interface{}) bool) []interface{}
+
+Exists(cond func(interface{}) bool) bool
+
+Find(cond func(interface{}) bool) interface{}
+
+FindAll(cond func(interface{}) bool) []interface{}
+
+FindLast(cond func(interface{}) bool) interface{}
+
+FindIndex(cond func(interface{}) bool) int
+
+FindLastIndex(cond func(interface{}) bool) int
+
+TrueForAll(cond func(interface{}) bool) bool
+
+Reverse()
+
+ToSliceString() []string
+
+ToSliceInt() []int
+
+ToSliceFloat64() []float64
 
 ## RoadMap
 
+* Others type list(string, int...)
 * Method DeleteRange
-* others list type(string, int...)
 
 ## License
 
