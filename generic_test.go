@@ -21,7 +21,7 @@ func TestParse(t *testing.T) {
 	l.Add(StructTest{1, "Lucas"})
 	l.Add(StructTest{2, "Diego"})
 
-	list := l.Me()
+	list := l.Values()
 	correctList := []StructTest{}
 
 	for k := range list {
@@ -220,7 +220,7 @@ func TestClear(t *testing.T) {
 
 	emptySlice := make([]interface{}, 0)
 
-	if !reflect.DeepEqual(l.Me(), emptySlice) {
+	if !reflect.DeepEqual(l.Values(), emptySlice) {
 		t.Error("expect equal lists")
 	}
 }
@@ -421,26 +421,112 @@ func TestFindTrueForAll(t *testing.T) {
 	}
 }
 
-func BenchmarkAddAndGetPure(b *testing.B) {
+func BenchmarkAddPure(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		var list []int
 
 		for i := 0; i < 1000000; i++ {
 			list = append(list, i)
 		}
-
-		// list[0] + list[500000]
 	}
 }
 
-func BenchmarkAddAndGet(b *testing.B) {
+func BenchmarkAdd(b *testing.B) {
 
 	for n := 0; n < b.N; n++ {
 		list := Generic{}
 		for i := 0; i < 1000000; i++ {
 			list.Add(1)
 		}
+	}
+}
 
-		// list.GetAt(500000)
+func BenchmarkFilterPure(b *testing.B) {
+	var list1 []int
+	var list2 []int
+
+	for i := 0; i < 1000000; i++ {
+		list1 = append(list1, i*5)
+	}
+
+	for n := 0; n < b.N; n++ {
+		for k := range list1 {
+			if list1[k]%10 == 0 {
+				list2 = append(list2, list1[k])
+			}
+		}
+	}
+}
+
+func BenchmarkFilter(b *testing.B) {
+	l := Generic{}
+
+	for i := 0; i < 1000000; i++ {
+		l.Add(i * 5)
+	}
+
+	for n := 0; n < b.N; n++ {
+		l.Filter(filter)
+	}
+}
+
+func find(val interface{}) bool {
+	num := val.(int)
+	return num == 100000
+}
+
+func BenchmarkFindPure(b *testing.B) {
+	var list1 []int
+
+	for i := 0; i < 1000000; i++ {
+		list1 = append(list1, i*5)
+	}
+
+	for n := 0; n < b.N; n++ {
+		for k := range list1 {
+			if list1[k] == 100000 {
+				break
+			}
+		}
+	}
+}
+
+func BenchmarkFind(b *testing.B) {
+	l := Generic{}
+
+	for i := 0; i < 1000000; i++ {
+		l.Add(i * 5)
+	}
+
+	for n := 0; n < b.N; n++ {
+		l.Find(find)
+	}
+}
+
+func doNothing(i int) int {
+	return i
+}
+
+func BenchmarkGetPure(b *testing.B) {
+	var list1 []int
+
+	for i := 0; i < 1000000; i++ {
+		list1 = append(list1, i*5)
+	}
+
+	for n := 0; n < b.N; n++ {
+		doNothing(list1[100000])
+	}
+}
+
+func BenchmarkGet(b *testing.B) {
+	l := Generic{}
+
+	for i := 0; i < 1000000; i++ {
+		l.Add(i * 5)
+	}
+
+	for n := 0; n < b.N; n++ {
+		doNothing(l.GetAt(100000).(int))
 	}
 }

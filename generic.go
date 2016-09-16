@@ -83,8 +83,8 @@ func (l *Generic) Clear() {
 	l.list = make([]interface{}, 0)
 }
 
-// Me Get all List
-func (l *Generic) Me() []interface{} {
+// Values Get all values in List
+func (l *Generic) Values() []interface{} {
 	return l.list
 }
 
