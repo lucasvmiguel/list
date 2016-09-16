@@ -4,7 +4,7 @@
 
 ## Description 
 
-List is a library to handle with slice in golang easily, it's inspired by the Class List .Net
+List is a library to handle with slice in golang easily, it's inspired by the Class List .Net.                            
 Because sometimes you do not want to lose minutes to win nanoseconds ;)
 
 https://msdn.microsoft.com/pt-br/library/6sh2ey19(v=vs.110).aspx
